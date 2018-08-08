@@ -40,7 +40,7 @@ Users can send reviews and favorite restaurants while being offline, once they a
 First download the code from github
 
 ```
-git clone https://github.com/carlosdg/RestaurantsReviews && cd RestaurantsReviews
+git clone --recurse-submodules https://github.com/carlosdg/RestaurantsReviews && cd RestaurantsReviews
 ```
 
 Now you have to create a `.env` file in the `webapp` folder to store some environment variables needed for the application. The file should be like the following:

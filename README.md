@@ -2,9 +2,9 @@
 
 This is the project made for [Udacity's Mobile Web Specialist nanodegree](https://www.udacity.com/course/mobile-web-specialist-nanodegree--nd024). This project was divided into three stages, you can see the ending result of each stage in the corresponding branches:
 
-- [stage-1](https://github.com/carlosdg/mws-restaurant-stage-1/tree/stage-1)
-- [stage-2](https://github.com/carlosdg/mws-restaurant-stage-1/tree/stage-2)
-- [stage-3](https://github.com/carlosdg/mws-restaurant-stage-1/tree/stage-3)
+- [stage-1](https://github.com/carlosdg/RestaurantsReviews/tree/stage-1)
+- [stage-2](https://github.com/carlosdg/RestaurantsReviews/tree/stage-2)
+- [stage-3](https://github.com/carlosdg/RestaurantsReviews/tree/stage-3)
 
 The main purpose of this project is to learn/improve the skills at:
 
@@ -31,19 +31,19 @@ This is an application about restaurants, users can:
 
 - See other users reviews of a restaurant
 
-All the restaurants and reviews data is retrieved from an external database via a [REST API](https://en.wikipedia.org/wiki/Representational_state_transfer). This data is stored on [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) so users can access the application with some content while being offline. Also, the waiting time for the application to load after the first load is very small because we first load the cached content and then update the application if the user is online.
+All the restaurants and reviews data is retrieved from the data_api server via a [REST API](https://en.wikipedia.org/wiki/Representational_state_transfer). This data is then stored on [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) so users can access the application with some content while being offline. Also, the waiting time for the application to load after the first load is very small because we first load the cached content and then update the application if the user is online.
 
 Users can send reviews and favorite restaurants while being offline, once they are online the requests will be sent to the remote database even if they leave the application, in this last case the data will be sent only when the users come back to the application
 
-## Run
+## Download and prerequisites
 
 First download the code from github
 
 ```
-git clone https://github.com/carlosdg/mws-restaurant-stage-1 && cd mws-restaurant-stage-1
+git clone https://github.com/carlosdg/RestaurantsReviews && cd RestaurantsReviews
 ```
 
-Now you have to create a `.env` file to store some environment variables needed for the application. The file should be like the following:
+Now you have to create a `.env` file in the `webapp` folder to store some environment variables needed for the application. The file should be like the following:
 
 ```bash
 # MODE specifies whether webpack should build the public folder for production or development
@@ -60,20 +60,26 @@ REMOTE_DB_BASE_URL=http://localhost:1337
 MAPBOX_API_KEY=api_key
 ```
 
-Install the app dependencies and generate the `public` folder
+## Run
+
+### Manually
+Install the app dependencies, generate the app `public` folder and install the API server depedencies
 
 ```
-npm install && npm run build
+cd webapp && npm install && npm run build && cd ../data_api && npm install
 ```
 
-Now you can start a server listening on port 8080 with
+Now you can start the data server with `npm start`. Now, in a new terminal session, go to the `webapp` folder and run a web server to serve the public folder with `npm start`
+
+### Via docker-compose
 
 ```
-npm start
+docker-compose build
+docker-compose up
 ```
 
 ## Authors
 
 - Carlos Domínguez García
 
-**Note**: this project was started off from the [Udacity's mws-restaurant-stage-1 repository](https://github.com/udacity/mws-restaurant-stage-1). They created that repository as a starting point for the nanodegree project.
+**Important Note**: this project was started off from the [Udacity's mws-restaurant-stage-1 repository](https://github.com/udacity/mws-restaurant-stage-1). They created that repository as a starting point for the nanodegree project.

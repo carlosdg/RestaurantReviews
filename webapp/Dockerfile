@@ -1,7 +1,5 @@
 ### Dockerfile to generate a image that builds the application
 ### (i.e. generates the "public" folder)
-### Whether it is for a production or development environment should
-### be specified via the MODE environment variable
 
 FROM node
 
@@ -13,3 +11,7 @@ COPY . /app
 
 # Install the dependencies and build the application folder
 RUN npm install && npm run build
+
+# When the container runs, rebuild the application in case
+# there is an update in the environment variables for example
+CMD [ "npm", "run", "build" ]

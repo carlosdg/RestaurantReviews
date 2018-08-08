@@ -1,0 +1,37 @@
+version: "3"
+services:
+  # Responsible of building the application in the "src_code" volume
+  # so it can be accessed by the web server
+  #
+  # Note that the API will be accessed through the browser
+  # which is not a part of this network. So setting the environment variable
+  # REMOTE_DB_BASE_URL=http://data_api:1337 won't work
+  webapp-builder:
+    build: "webapp"
+    volumes:
+      - "src_code:/app/public"
+
+  # REST API providing the application with the restaurant 
+  # and reviews data
+  data_api:
+    build: "data_api"
+    environment:
+      NODE_ENV: "production"
+    ports:
+      - "1337:1337"
+
+  # Web server that serves the web application located
+  # in the "src_code" volumen
+  server:
+    image: "nginx"
+    volumes:
+      - "src_code:/usr/share/nginx/html"
+    ports:
+      - "8080:80"
+    depends_on:
+      - "webapp-builder"
+      - "data_api"
+
+volumes:
+  # Volumen where the web application to serve is located
+  src_code:
